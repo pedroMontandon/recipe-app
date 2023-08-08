@@ -3,12 +3,12 @@ import { AppContext } from '../context/AppProvider';
 import RecipeCardMeals from '../components/RecipeCardMeals';
 import RecipeCardDrinks from '../components/RecipeCardDrinks';
 
-const MEALS_API = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-const DRINKS_API = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-const MEALS_CATEGORIES = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-const DRINK_CATEGORIES = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
-const CATEGORY_SELECTED_MEALS = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
-const CATEGORY_SELECTED_DRINKS = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
+const MEALS_API = '/meals/name?q='; // pode ser /random se preferir
+const DRINKS_API = '/drinks/name?q='; // pode ser /random se preferir
+const MEALS_CATEGORIES = '/meals/categories';
+const DRINK_CATEGORIES = '/drinks/categories';
+const CATEGORY_SELECTED_MEALS = '/meals/category?q=';
+const CATEGORY_SELECTED_DRINKS = '/drinks/category?q=';
 
 function useRecipes(title) {
   const lowerTitle = title.toLowerCase();
