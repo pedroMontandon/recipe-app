@@ -18,6 +18,10 @@ export default class UserModel implements IUserModel{
     return await this.userModel.findByPk(id);
   }
 
+  async findByEmail(email: string): Promise<IUser | null> {
+    return await this.userModel.findOne({ where: { email } });
+  }
+
   async update(id: number, patchedUser: NewEntity<IUser>): Promise<IUser | null> {
     const newUser = await this.userModel.update(patchedUser, { where: { id } });
     if (!newUser) return null;
