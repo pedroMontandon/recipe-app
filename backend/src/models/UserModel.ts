@@ -22,10 +22,11 @@ export default class UserModel implements IUserModel{
     return await this.userModel.findOne({ where: { email } });
   }
 
-  async update(id: number, patchedUser: NewEntity<IUser>): Promise<IUser | null> {
-    const newUser = await this.userModel.update(patchedUser, { where: { id } });
-    if (!newUser) return null;
-    return { id, ...patchedUser };
+  async update(id: number, patchedUser: Partial<IUser>): Promise<IUser | null> {
+    const user = await this.userModel.findByPk(id);
+    if (!user) return null;
+    await this.userModel.update(patchedUser, { where: { id } });
+    return user;
   }
 
   async delete(id: number): Promise<number> {
