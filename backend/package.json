@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "./src/server",
-  "type": "module",
   "scripts": {
     "db:reset": "npx tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "build": "tsc --project tsconfig.json",
@@ -39,6 +38,7 @@
     "bcryptjs": "2.4.3",
     "bull": "^4.11.1",
     "cors": "2.8.5",
+    "dotenv": "^16.3.1",
     "express": "4.17.1",
     "express-async-errors": "3.1.1",
     "joi": "^17.9.2",

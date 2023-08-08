@@ -23,13 +23,21 @@ export default class UserService {
   }
 
   async signUp (user: NewEntity<IUser>) {
-    const { email } = user;
+    const { email, username } = user;
     const existingUser = await this.userModel.findByEmail(email);
     if (existingUser) return { status: 'CONFLICT', data: { message: 'User already exists' } };
     const activationCode = activationCodeGenerator.generateActivationCode();
     const hashedPassword = await bcrypt.hash(user.password, 10);
     const newUser = await this.userModel.create({ email, username: user.username, password: hashedPassword, activationCode, activated: false });
-    emailQueue.add({ email, subject: 'Activate your account', body: buildActivationUrl({ id: newUser.id, activationCode}) });
+    emailQueue.add({ method: 'activationCode', email, username, activationCode: buildActivationUrl({ id: newUser.id, activationCode}) });
     return { status: 'CREATED', data: { message: `${newUser.username} has been created. Check your email to activate it`} };
+  }
+
+  async activateAccount (id: number, activationCode: string) {
+    const user = await this.userModel.findById(id);
+    if (!user) return { status: 'NOT_FOUND', data: { message: 'User not found' } };
+    if (user.activationCode !== activationCode) return { status: 'INVALID_DATA', data: { message: 'Invalid activation code' } };
+    await this.userModel.update(id, { activated: true });
+    return { status: 'SUCCESSFUL', data: { message: `${user.username} has been activated`} };
   }
 }

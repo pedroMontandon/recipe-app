@@ -19,4 +19,4 @@ emailQueue.process(async (job: Queue.Job) => {
   }
 });
 
-export default emailQueue;
+export default { emailQueue };

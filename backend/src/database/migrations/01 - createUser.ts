@@ -25,6 +25,7 @@ export default {
       activationCode: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: 'activation_code',
       },
       activated: {
         type: DataTypes.BOOLEAN,

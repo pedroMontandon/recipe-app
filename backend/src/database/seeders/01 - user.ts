@@ -7,14 +7,14 @@ export default {
         username: 'user',
         email: 'user@example.com',
         password: 'user',
-        activationCode: 'user',
+        activation_code: 'user',
         activated: true
       },
       {
         username: 'inactiveUser',
         email: 'inactiveUser@example.com',
         password: 'inactiveUser',
-        activationCode: 'inactiveUser',
+        activation_code: 'inactiveUser',
         activated: false
       }
     ]);
