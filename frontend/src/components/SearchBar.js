@@ -35,22 +35,22 @@ function SearchBar() {
   const handleMealFetch = () => {
     switch (option) {
     case 'name':
-      return fetchData(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`);
+      return fetchData(`/meals/name?q=${searchText}`);
     case firstLetter:
-      return fetchData(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchText.toLowerCase()}`);
+      return fetchData(`/meals/letter?q=${searchText.toLowerCase()}`);
     default:
-      return fetchData(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchText.toLowerCase()}`);
+      return fetchData(`/meals/ingredient?q=${searchText.toLowerCase()}`);
     }
   };
 
   const handleDrinksFetch = () => {
     switch (option) {
     case 'name':
-      return fetchData(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchText}`);
+      return fetchData(`/drinks/name?q=${searchText}`);
     case firstLetter:
-      return fetchData(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchText.toLowerCase()}`);
+      return fetchData(`/drinks/letter?q=${searchText.toLowerCase()}`);
     default:
-      return fetchData(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchText.toLowerCase()}`);
+      return fetchData(`/drinks/ingredient?q=${searchText.toLowerCase()}`);
     }
   };
 

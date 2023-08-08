@@ -5,8 +5,8 @@ import RecipeInProgressCard from '../components/RecipeInProgressCard';
 import ShareAndFav from '../components/ShareAndFav';
 import { getDetails } from '../helpers/getDetails';
 
-const MEAL_ID_ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-const COCKTAIL_ID_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+const MEAL_ID_ENDPOINT = '/meals/';
+const COCKTAIL_ID_ENDPOINT = '/drinks/';
 const INITIAL_IN_PROGRESS_RECIPES = { meals: {}, drinks: {} };
 
 function RecipeInProgress() {

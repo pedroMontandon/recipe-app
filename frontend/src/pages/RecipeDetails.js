@@ -15,10 +15,10 @@ function RecipeDetail() {
   const { location: { pathname }, push } = useHistory();
   const URLpath = window.location.href;
   const { id } = params;
-  const MEAL_S_ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-  const COCTAIL_S_ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-  const MEAL_ID_ENDPOINT = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const COCKTAIL_ID_ENDPOINT = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const MEAL_S_ENDPOINT = '/meals/name?q='; // pode ser /random se preferir
+  const COCTAIL_S_ENDPOINT = '/meals/name?q='; // pode ser /random se preferir
+  const MEAL_ID_ENDPOINT = `/meals/${id}`;
+  const COCKTAIL_ID_ENDPOINT = `/drinks/${id}`;
   const recipeType = pathname.includes('meal') ? MEAL_ID_ENDPOINT : COCKTAIL_ID_ENDPOINT;
   const detailsType = pathname.includes('meal') ? COCTAIL_S_ENDPOINT : MEAL_S_ENDPOINT;
   const [, , recipe, fetchingData] = useFetch({
