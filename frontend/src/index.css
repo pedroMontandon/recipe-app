@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Sacramento&display=swap');
+
+:root {
+  --primary-color: #e2f1b1;
+  --secondary-color: #BC4749;
+  --tertiary-color: #32A287;
+  --quaternary-color: #13262F;
+  --quintenary-color: #F79D5C;
+  --logo-name: 'Sacramento', cursive;
+  --title-font: 'Indie Flower', cursive
+}
+
