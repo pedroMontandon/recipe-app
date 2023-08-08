@@ -12,6 +12,8 @@ import {
     declare username: string;
     declare email: string;
     declare password: string;
+    declare activationCode: string;
+    declare activated: boolean;
   }
   
   SequelizeUser.init({
@@ -33,6 +35,14 @@ import {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    activationCode: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    activated: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    }
     }, {
       sequelize: db,
       modelName: 'user',
