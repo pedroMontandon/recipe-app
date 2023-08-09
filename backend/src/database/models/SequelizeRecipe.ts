@@ -1,5 +1,7 @@
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import db from '.';
+import SequelizeCategory from './SequelizeCategory';
+import SequelizeArea from './SequelizeArea';
 
 class SequelizeRecipe extends Model<InferAttributes<SequelizeRecipe>, InferCreationAttributes<SequelizeRecipe>> {
   declare id: CreationOptional<number>;
@@ -75,5 +77,11 @@ SequelizeRecipe.init(
     timestamps: false,
   }
 );
+
+SequelizeRecipe.belongsTo(SequelizeCategory, { foreignKey: 'categoryId', as: 'category', targetKey: 'id' });
+SequelizeCategory.belongsTo(SequelizeRecipe, { foreignKey: 'categoryId', as: 'recipes', targetKey: 'id' });
+
+SequelizeRecipe.belongsTo(SequelizeArea, { foreignKey: 'categoryId', as: 'area', targetKey: 'id' });
+SequelizeArea.belongsTo(SequelizeRecipe, { foreignKey: 'categoryId', as: 'recipes', targetKey: 'id' });
 
 export default SequelizeRecipe;
