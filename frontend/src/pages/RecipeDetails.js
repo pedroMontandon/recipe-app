@@ -16,7 +16,7 @@ function RecipeDetail() {
   const URLpath = window.location.href;
   const { id } = params;
   const MEAL_S_ENDPOINT = '/meals/name?q='; // pode ser /random se preferir
-  const COCTAIL_S_ENDPOINT = '/meals/name?q='; // pode ser /random se preferir
+  const COCTAIL_S_ENDPOINT = '/drinks/name?q='; // pode ser /random se preferir
   const MEAL_ID_ENDPOINT = `/meals/${id}`;
   const COCKTAIL_ID_ENDPOINT = `/drinks/${id}`;
   const recipeType = pathname.includes('meal') ? MEAL_ID_ENDPOINT : COCKTAIL_ID_ENDPOINT;
