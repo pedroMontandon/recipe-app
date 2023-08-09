@@ -32,7 +32,7 @@ SequelizeRecipe.init(
       allowNull: false,
     },
     categoryId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       field: 'category_id',
       references: {
@@ -43,7 +43,7 @@ SequelizeRecipe.init(
       onUpdate: 'CASCADE'
     },
     areaId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED ,
       allowNull: true,
       field: 'area_id',
       references: {
@@ -79,9 +79,9 @@ SequelizeRecipe.init(
 );
 
 SequelizeRecipe.belongsTo(SequelizeCategory, { foreignKey: 'categoryId', as: 'category', targetKey: 'id' });
-SequelizeCategory.belongsTo(SequelizeRecipe, { foreignKey: 'categoryId', as: 'recipes', targetKey: 'id' });
+SequelizeCategory.hasMany(SequelizeRecipe, { foreignKey: 'categoryId', as: 'recipes' });
 
 SequelizeRecipe.belongsTo(SequelizeArea, { foreignKey: 'categoryId', as: 'area', targetKey: 'id' });
-SequelizeArea.belongsTo(SequelizeRecipe, { foreignKey: 'categoryId', as: 'recipes', targetKey: 'id' });
+SequelizeArea.hasMany(SequelizeRecipe, { foreignKey: 'categoryId', as: 'recipes' });
 
 export default SequelizeRecipe;

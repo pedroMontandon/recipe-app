@@ -4,7 +4,7 @@ import RecipesModel from '../models/RecipeModel';
 
 export default class RecipesService {
   constructor(
-        private recipesModel =new RecipesModel(),
+        private recipesModel = new RecipesModel(),
   ) { }
 
   public async getAllRecipes(type: string): Promise<ServiceResponse<IRecipes[]>> {

@@ -1,9 +1,9 @@
-import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
+import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import db from '.';
 
 class SequelizeCategory extends Model<InferAttributes<SequelizeCategory>, InferCreationAttributes<SequelizeCategory>>{
-  declare id: number;
-  declare name: number;
+  declare id: CreationOptional<number>;
+  declare name: string;
   declare type: 'Meals' | 'Drinks';
 }
 
