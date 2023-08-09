@@ -18,13 +18,27 @@ export default {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      category: {
-        type: DataTypes.STRING,
+      categoryId: {
+        type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
+        field: 'category_id',
+        references: {
+          model: 'categories',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      area: {
-        type: DataTypes.STRING,
+      areaId: {
+        type: DataTypes.INTEGER.UNSIGNED,
         allowNull: true,
+        field: 'area_id',
+        references: {
+          model: 'areas',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       instructions: {
         type: DataTypes.STRING(5000),
