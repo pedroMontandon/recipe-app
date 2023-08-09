@@ -16,4 +16,10 @@ export default class RecipesController {
     const serviceResponse = await this.recipesService.findByName(query, res.locals.type);
     return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
+
+  public async getByFirstLetter(req: Request, res: Response) {
+    const query = String(req.query.q);
+    const serviceResponse = await this.recipesService.findByFirstLetter(query, res.locals.type);
+    return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+  }
 }

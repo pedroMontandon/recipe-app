@@ -16,4 +16,9 @@ export default class RecipesService {
     const foundRecipe = await this.recipesModel.findByName(name, type);
     return { status: 'SUCCESSFUL', data: foundRecipe };
   }
+
+  public async findByFirstLetter(letter: string, type: string): Promise<ServiceResponse<IRecipes[]>> {
+    const foundRecipe = await this.recipesModel.findByFirstLetter(letter, type);
+    return { status: 'SUCCESSFUL', data: foundRecipe };
+  }
 }

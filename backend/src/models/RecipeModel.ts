@@ -33,7 +33,7 @@ export default class RecipesModel {
     return await this.recipeModel.findAll({
       where: {
         name: {
-          [Op.like]: `${letter}%`
+          [Op.startsWith]: letter
         },
         type: {
           [Op.like]: `%${type}%`
