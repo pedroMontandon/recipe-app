@@ -7,8 +7,8 @@ export default class RecipesService {
         private recipesModel =new RecipesModel(),
   ) { }
 
-  public async getAllRecipes(): Promise<ServiceResponse<IRecipes[]>> {
-    const allRecipes = await this.recipesModel.findAll();
+  public async getAllRecipes(type: string): Promise<ServiceResponse<IRecipes[]>> {
+    const allRecipes = await this.recipesModel.findAll(type);
     return { status: 'SUCCESSFUL', data: allRecipes };
   }
 }

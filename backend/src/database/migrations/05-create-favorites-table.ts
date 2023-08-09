@@ -12,7 +12,7 @@ export default {
           primaryKey: true,
           field: 'user_id',
           references: {
-            model: 'user',
+            model: 'users',
             key: 'id',
           },
           onDelete: 'CASCADE',

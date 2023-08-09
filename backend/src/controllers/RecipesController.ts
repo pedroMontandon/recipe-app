@@ -6,8 +6,9 @@ export default class RecipesController {
   constructor (private recipesService = new RecipesService()) {}
 
   public async getAllRecipes(req: Request, res: Response) {
-    if (!req.query) {
-      const serviceResponse = await this.recipesService.getAllRecipes();
+    if (!req.query.q) {
+      console.log('teste');
+      const serviceResponse = await this.recipesService.getAllRecipes(res.locals.type);
       return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
     }
   }
