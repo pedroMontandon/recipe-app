@@ -5,8 +5,8 @@ class SequelizeRecipe extends Model<InferAttributes<SequelizeRecipe>, InferCreat
   declare id: CreationOptional<number>;
   declare name: string;
   declare type: 'Drinks' | 'Meals';
-  declare category: string;
-  declare area: string;
+  declare categoryId: number;
+  declare areaId: number;
   declare instructions: string;
   declare thumb: string;
   declare tags: string;
@@ -29,13 +29,27 @@ SequelizeRecipe.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    category: {
-      type: DataTypes.STRING,
+    categoryId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      field: 'category_id',
+      references: {
+        model: 'categories',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     },
-    area: {
-      type: DataTypes.STRING,
+    areaId: {
+      type: DataTypes.INTEGER,
       allowNull: true,
+      field: 'area_id',
+      references: {
+        model: 'areas',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     },
     instructions: {
       type: DataTypes.STRING(5000),
