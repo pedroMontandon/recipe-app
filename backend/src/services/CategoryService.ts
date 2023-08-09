@@ -1,3 +1,5 @@
+import { IRecipes } from '../interfaces/recipes/IRecipes';
+import CategoryWithRecipes from '../interfaces/categories/CategoryWithRecipes';
 import ICategory from '../interfaces/categories/ICategory';
 import { ServiceResponse } from '../interfaces/ServiceResponse';
 import CategoryModel from '../models/CategoryModel';
@@ -18,13 +20,12 @@ export default class CategoryService {
     }
   }
 
-  public async getRecipesByCategory(name: string, type: string): Promise<ServiceResponse<ICategory>> {
+  public async getRecipesByCategory(name: string, type: string): Promise<ServiceResponse<IRecipes[]>> {
     try {
-      const category = await this.model.getRecipesByCategory(name, type);
+      const category = await this.model.getRecipesByCategory(name, type) as CategoryWithRecipes;
       if (!category) return { status: 'NOT_FOUND', data: { message: 'Category not found' } };
-      return { status: 'SUCCESSFUL', data: category }; 
+      return { status: 'SUCCESSFUL', data: category.recipes }; 
     } catch (error) {
-      console.log(error);
       return { status: 'INTERNAL_SERVER_ERROR', data: { message: 'Internal server error' } };
     }
   }
