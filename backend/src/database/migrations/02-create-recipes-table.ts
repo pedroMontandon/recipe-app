@@ -6,6 +6,7 @@ export default {
     await queryInterface.createTable<Model<IRecipes>>('recipes', {
       id: {
         type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
