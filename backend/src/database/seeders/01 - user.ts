@@ -6,14 +6,16 @@ export default {
       {
         username: 'user',
         email: 'user@example.com',
-        password: 'user',
+        password: '$2a$10$mX0T/HtujfFcAVKrK5aMY.YjIxbAmgBRBnfcf71iFUjujCJuONzhu',
+        // password: 'userPassword',
         activation_code: 'user',
         activated: true
       },
       {
         username: 'inactiveUser',
         email: 'inactiveUser@example.com',
-        password: 'inactiveUser',
+        // password: 'inactiveUserPassword',
+        password: '$2a$10$5F8I8yE7BdIOnkegNUaXYeMwAC/SxFeafr1vDBJtS1U7h0Xd1.ozC',
         activation_code: 'inactiveUser',
         activated: false
       }
