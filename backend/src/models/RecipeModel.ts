@@ -20,10 +20,10 @@ export default class RecipesModel {
     return await this.recipeModel.findAll({
       where: {
         name: {
-          [Op.iLike]: `%${name}%`
+          [Op.like]: `%${name}%`
         },
         type: {
-          [Op.iLike]: `%${type}%`
+          [Op.like]: `%${type}%`
         }
       }
     });
@@ -33,10 +33,10 @@ export default class RecipesModel {
     return await this.recipeModel.findAll({
       where: {
         name: {
-          [Op.iLike]: `${letter}%`
+          [Op.like]: `${letter}%`
         },
         type: {
-          [Op.iLike]: `%${type}%`
+          [Op.like]: `%${type}%`
         }
       }
     });

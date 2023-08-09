@@ -11,5 +11,9 @@ export default class RecipesController {
       const serviceResponse = await this.recipesService.getAllRecipes(res.locals.type);
       return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
     }
+
+    const query = String(req.query.q);
+    const serviceResponse = await this.recipesService.findByName(query, res.locals.type);
+    return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
 }
