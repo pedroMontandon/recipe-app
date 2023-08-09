@@ -14,8 +14,17 @@ export default class CategoryService {
       const categories = await this.model.getAll(type);
       return { status: 'SUCCESSFUL', data: categories };
     } catch (error) {
+      return { status: 'INTERNAL_SERVER_ERROR', data: { message: 'Internal server error' } };
+    }
+  }
+
+  public async getRecipesByCategory(name: string, type: string): Promise<ServiceResponse<ICategory>> {
+    try {
+      const category = await this.model.getRecipesByCategory(name, type);
+      if (!category) return { status: 'NOT_FOUND', data: { message: 'Category not found' } };
+      return { status: 'SUCCESSFUL', data: category }; 
+    } catch (error) {
       console.log(error);
-      
       return { status: 'INTERNAL_SERVER_ERROR', data: { message: 'Internal server error' } };
     }
   }

@@ -14,4 +14,11 @@ export default class CategoryController {
     const { status, data } = await this.service.getAll(type);
     return res.status(mapStatusHTTP(status)).json(data);
   }
+
+  public async getRecipesByCategory(req: Request, res: Response) {
+    const { type } = res.locals;
+    const { q } = req.query;
+    const { status, data } = await this.service.getRecipesByCategory(q as string, type);
+    return res.status(mapStatusHTTP(status)).json(data);
+  }
 }
