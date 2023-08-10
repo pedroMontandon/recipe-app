@@ -4,7 +4,7 @@ import db from '.';
 class SequelizeArea extends Model<InferAttributes<SequelizeArea>, InferCreationAttributes<SequelizeArea>>{
   declare id: CreationOptional<number>;
   declare name: string;
-  declare type: 'Meals' | 'Drinks';
+  // declare type: 'Meals' | 'Drinks';
 }
 
 SequelizeArea.init(
@@ -19,10 +19,10 @@ SequelizeArea.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    type: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    }
+    // type: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    // }
   },
   {
     sequelize: db,
