@@ -21,6 +21,7 @@ function CategoriesList({ title, fetchRecipes }) {
   }, [title]);
 
   useEffect(() => {
+    console.log(categories);
     setToggles(categories[lowerTitle]
       .reduce((acc, curr) => ({ ...acc, [curr.strCategory]: false }), {}));
   }, [categories]);
