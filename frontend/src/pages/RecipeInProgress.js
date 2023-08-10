@@ -3,7 +3,6 @@ import { useLocation, useParams } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import RecipeInProgressCard from '../components/RecipeInProgressCard';
 import ShareAndFav from '../components/ShareAndFav';
-import { getDetails } from '../helpers/getDetails';
 
 const MEAL_ID_ENDPOINT = '/meals/';
 const COCKTAIL_ID_ENDPOINT = '/drinks/';
@@ -28,7 +27,7 @@ function RecipeInProgress() {
   if (isLoading) return <h1>Loading...</h1>;
   return (
     <section>
-      <ShareAndFav url={ URLpath } recipe={ getDetails(recipe, pathname) } />
+      <ShareAndFav url={ URLpath } recipe={ recipe } />
       { recipe && (
         <RecipeInProgressCard recipe={ recipe } id={ id } />
       )}

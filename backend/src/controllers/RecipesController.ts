@@ -7,7 +7,6 @@ export default class RecipesController {
 
   public async getAllRecipes(req: Request, res: Response) {
     if (!req.query.q) {
-      console.log('teste');
       const serviceResponse = await this.recipesService.getAllRecipes(res.locals.type);
       return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
     }
@@ -21,6 +20,11 @@ export default class RecipesController {
     const query = String(req.query.q);
     const serviceResponse = await this.recipesService.findByFirstLetter(query, res.locals.type);
     return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+  }
+
+  public async getById(req: Request, res: Response) {
+    const { status, data } = await this.recipesService.findByPk(req.params.id, res.locals.type);
+    return res.status(mapStatusHTTP(status)).json(data);
   }
 
   public async random(req: Request, res: Response) {

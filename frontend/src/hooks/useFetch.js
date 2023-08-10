@@ -6,7 +6,7 @@ function useFetch(initialDataValue = null) {
   const [errors, setErrors] = useState(null);
   const [data, setData] = useState(initialDataValue);
   const fetchingData = async (URL) => {
-    api.get(URL).then((response) => setData(response)).catch((e) => setErrors(e))
+    api.get(URL).then((response) => setData(response.data)).catch((e) => setErrors(e))
       .finally(setIsLoading(false));
     // try {
     //   setIsLoading(true);

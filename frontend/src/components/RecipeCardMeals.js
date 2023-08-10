@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function RecipeCardMeals({ recipe: { strMeal, strMealThumb, idMeal }, index }) {
+function RecipeCardMeals({ recipe: { name, thumb, id }, index }) {
   return (
-    <Link to={ `/meals/${idMeal}` }>
+    <Link to={ `/meals/${id}` }>
       <section data-testid={ `${index}-recipe-card` } className="recipe-card">
         <div>
           <img
-            src={ strMealThumb }
-            alt={ strMeal }
+            src={ thumb }
+            alt={ name }
             data-testid={ `${index}-card-img` }
           />
         </div>
-        <h4 data-testid={ `${index}-card-name` }>{ strMeal }</h4>
+        <h4 data-testid={ `${index}-card-name` }>{ name }</h4>
       </section>
     </Link>
   );
@@ -21,9 +21,9 @@ function RecipeCardMeals({ recipe: { strMeal, strMealThumb, idMeal }, index }) {
 
 RecipeCardMeals.propTypes = {
   recipe: PropTypes.shape({
-    strMeal: PropTypes.string,
-    strMealThumb: PropTypes.string,
-    idMeal: PropTypes.string,
+    name: PropTypes.string,
+    thumb: PropTypes.string,
+    id: PropTypes.string,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };

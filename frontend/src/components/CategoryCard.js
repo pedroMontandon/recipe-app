@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CategoryCard({ category: { strCategory }, onClick, icon }) {
+function CategoryCard({ category: { name }, onClick, icon }) {
   return (
     <div>
       <button
-        data-testid={ `${strCategory}-category-filter` }
-        onClick={ () => onClick(strCategory) }
+        data-testid={ `${name}-category-filter` }
+        onClick={ () => onClick(name) }
         className="category-button"
       >
         <div>
-          <img src={ icon } alt={ strCategory } />
+          <img src={ icon } alt={ name } />
         </div>
-        <span>{strCategory}</span>
+        <span>{name}</span>
       </button>
     </div>
   );
@@ -20,7 +20,7 @@ function CategoryCard({ category: { strCategory }, onClick, icon }) {
 
 CategoryCard.propTypes = {
   category: PropTypes.shape({
-    strCategory: PropTypes.string,
+    name: PropTypes.string,
   }).isRequired,
   onClick: PropTypes.func.isRequired,
   icon: PropTypes.string.isRequired,
