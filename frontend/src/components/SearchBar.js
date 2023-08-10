@@ -2,36 +2,30 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import { AppContext } from '../context/AppProvider';
-
 function SearchBar() {
   const history = useHistory();
   const [option, setOption] = useState('');
   const [searchText, setSearchText] = useState('');
   const { helpers: { title }, functions } = useContext(AppContext);
-  const [, error, result, fetchData] = useFetch({ [title.toLowerCase()]: [] });
+  const [, error, result, fetchData] = useFetch(['no entry']);
   const firstLetter = 'first-letter';
-
   useEffect(() => {
-    const fetchedData = result[title.toLowerCase()];
-    if ((Object.keys(result).length === 1
-    && Object.values(result)[0] == null) || error !== null) {
+    const fetchedData = result;
+    if (result.length < 1) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
-    } else if (fetchedData !== undefined
-    && fetchedData.length === 1) {
+    } else if (fetchedData !== undefined && fetchedData.length === 1 && result[0] !== 'no entry') {
       if (title === 'Meals') {
-        const dataForId = result.meals[0];
-        history.push(`/meals/${dataForId.idMeal}`);
+        const dataForId = result[0];
+        history.push(`/meals/${dataForId.id}`);
       }
       if (title === 'Drinks') {
-        const dataForId = result.drinks[0];
-        history.push(`/drinks/${dataForId.idDrink}`);
+        const dataForId = result[0];
+        history.push(`/drinks/${dataForId.id}`);
       }
-    } else if (fetchedData !== undefined
-    && fetchedData.length > 1) {
+    } else if (fetchedData !== undefined && fetchedData.length > 1) {
       functions[`set${title}`](fetchedData);
     }
   }, [result, error]);
-
   const handleMealFetch = () => {
     switch (option) {
     case 'name':
@@ -42,7 +36,6 @@ function SearchBar() {
       return fetchData(`/meals/ingredient?q=${searchText.toLowerCase()}`);
     }
   };
-
   const handleDrinksFetch = () => {
     switch (option) {
     case 'name':
@@ -53,7 +46,6 @@ function SearchBar() {
       return fetchData(`/drinks/ingredient?q=${searchText.toLowerCase()}`);
     }
   };
-
   const handleSearchBtn = () => {
     if (option === firstLetter && searchText.length > 1) {
       global.alert('Your search must have only 1 (one) character');
@@ -65,7 +57,6 @@ function SearchBar() {
       handleDrinksFetch();
     }
   };
-
   return (
     <section className="search-bar-wrapper">
       <div>
@@ -123,5 +114,4 @@ function SearchBar() {
     </section>
   );
 }
-
 export default SearchBar;
