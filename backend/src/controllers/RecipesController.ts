@@ -7,11 +7,9 @@ export default class RecipesController {
 
   public async getAllRecipes(req: Request, res: Response) {
     if (!req.query.q) {
-      console.log('teste');
       const serviceResponse = await this.recipesService.getAllRecipes(res.locals.type);
       return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
     }
-
     const query = String(req.query.q);
     const serviceResponse = await this.recipesService.findByName(query, res.locals.type);
     return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
