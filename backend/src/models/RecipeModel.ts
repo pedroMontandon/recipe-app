@@ -1,6 +1,5 @@
 import { Op } from 'sequelize';
 import SequelizeRecipe from '../database/models/SequelizeRecipe';
-// import { IRecipeModel } from '../interfaces/recipes/IRecipesModel';
 import { IRecipes } from '../interfaces/recipes/IRecipes';
 import SequelizeCategory from '../database/models/SequelizeCategory';
 import SequelizeArea from '../database/models/SequelizeArea';
