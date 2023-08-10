@@ -8,15 +8,15 @@ function Ingredients({ recipe, id, title }) {
   const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
   const currentIngredientsInProgress = recipesInProgress[title][id];
-  const ingrendientsQuantity = Object.entries(recipe)
-    .filter(([measureKey, measure]) => measureKey.includes('Measure') && measure)
-    .map((eachQuantity) => eachQuantity[1]);
-  const ingredients = Object.entries(recipe)
-    .filter(([ingredientIndex, ingredient]) => ingredientIndex
-      .includes('Ingredient') && ingredient)
-    .map((eachIngredient, i) => `${ingrendientsQuantity[i] || ''} ${eachIngredient[1]}`);
-  const ingredientsToLocalStorage = ingredients
-    .reduce((acc, ingredient) => [...acc, { ingredient, done: false }], []);
+  // const ingrendientsQuantity = Object.entries(recipe)
+  //   .filter(([measureKey, measure]) => measureKey.includes('Measure') && measure)
+  //   .map((eachQuantity) => eachQuantity[1]);
+  // const ingredients = Object.entries(recipe)
+  //   .filter(([ingredientIndex, ingredient]) => ingredientIndex
+  //     .includes('Ingredient') && ingredient)
+  //   .map((eachIngredient, i) => `${ingrendientsQuantity[i] || ''} ${eachIngredient[1]}`);
+  const ingredientsToLocalStorage = recipe.ingredients
+    .reduce((acc, ingredient) => [...acc, { ingredient: ingredient.name + ' ' + ingredient.ingredients_recipes.measure, done: false }], []);
   const defaultDoneSteps = currentIngredientsInProgress || ingredientsToLocalStorage;
   const [doneSteps, setDoneSteps] = useState(defaultDoneSteps);
 
@@ -55,7 +55,7 @@ function Ingredients({ recipe, id, title }) {
           className="ing-list"
         >
           {
-            ingredients.map((ingredient, index) => (
+            recipe.ingredients.map((ingredient, index) => (
               <label
                 data-testid={ `${index}-ingredient-step` }
                 className="label-ingredient"
@@ -70,7 +70,7 @@ function Ingredients({ recipe, id, title }) {
                     .some((doneRecipe) => doneRecipe.id === id) }
                   onChange={ handleCheckBox }
                 />
-                {ingredient}
+                { ingredient.name } { ingredient.ingredients_recipes.measure }
               </label>
             ))
           }

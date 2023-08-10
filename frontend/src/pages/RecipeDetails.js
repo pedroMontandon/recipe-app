@@ -15,8 +15,8 @@ function RecipeDetail() {
   const { location: { pathname }, push } = useHistory();
   const URLpath = window.location.href;
   const { id } = params;
-  const MEAL_S_ENDPOINT = '/random';
-  const COCTAIL_S_ENDPOINT = '/random';
+  const MEAL_S_ENDPOINT = '/meals/random?limit=6';
+  const COCTAIL_S_ENDPOINT = '/drinks/random?limit=6';
   const MEAL_ID_ENDPOINT = `/meals/${id}`;
   const COCKTAIL_ID_ENDPOINT = `/drinks/${id}`;
   const recipeType = pathname.includes('meal') ? MEAL_ID_ENDPOINT : COCKTAIL_ID_ENDPOINT;
@@ -35,51 +35,49 @@ function RecipeDetail() {
         : Object.values({ ...recommendList.meals });
       const finalList = [];
       const newList = list.slice(0, recomendationLength);
-      newList.forEach((element) => {
-        finalList.push({
-          id: element.idDrink || element.idMeal,
-          Thumb: element.strDrinkThumb || element.strMealThumb,
-          name: element.strDrink || element.strMeal });
+      newList.forEach(({ id, thumb, name }) => {
+        finalList.push({ id, thumb, name });
       });
       return finalList;
     }
   };
 
-  const getDetails = (detailed) => {
-    const ingredientsRange = 20;
-    const ing = 'strIngredient';
-    const meas = 'strMeasure';
-    const recipeData = pathname.includes('meal') ? { ...detailed.meals[0] }
-      : { ...detailed.drinks[0] };
-    const payload = {
-      area: recipeData.strArea || '',
-      id: recipeData.idDrink || recipeData.idMeal,
-      title: recipeData.strMeal || recipeData.strDrink,
-      thumbnail: recipeData.strMealThumb || recipeData.strDrinkThumb,
-      instructions: recipeData.strInstructions,
-      category: pathname.includes('meals') ? recipeData.strCategory
-        : recipeData.strCategory,
-      alcoholicOrNot: recipeData.strAlcoholic || '',
-      ingredients: [],
-      measurements: [],
-      video: recipeData.strYoutube || 'false',
-    };
-    for (let i = 1; i <= ingredientsRange; i += 1) {
-      const ingRef = recipeData[ing + i];
-      if (ingRef !== null && ingRef !== undefined && ingRef !== '') {
-        payload.ingredients.push(recipeData[ing + i]);
-        payload.measurements.push(recipeData[meas + i]);
-      }
-    }
-    return payload;
-  };
+  // Adicionar álcool depois
+  // const getDetails = (detailed) => {
+  //   const ingredientsRange = 20;
+  //   const ing = 'strIngredient';
+  //   const meas = 'strMeasure';
+  //   const recipeData = pathname.includes('meal') ? { ...detailed.meals[0] }
+  //     : { ...detailed.drinks[0] };
+  //   const payload = {
+  //     area: recipeData.strArea || '',
+  //     id: recipeData.idDrink || recipeData.idMeal,
+  //     title: recipeData.strMeal || recipeData.strDrink,
+  //     thumbnail: recipeData.strMealThumb || recipeData.strDrinkThumb,
+  //     instructions: recipeData.strInstructions,
+  //     category: pathname.includes('meals') ? recipeData.strCategory
+  //       : recipeData.strCategory,
+  //     alcoholicOrNot: recipeData.strAlcoholic || '',
+  //     ingredients: [],
+  //     measurements: [],
+  //     video: recipeData.strYoutube || 'false',
+  //   };
+  //   for (let i = 1; i <= ingredientsRange; i += 1) {
+  //     const ingRef = recipeData[ing + i];
+  //     if (ingRef !== null && ingRef !== undefined && ingRef !== '') {
+  //       payload.ingredients.push(recipeData[ing + i]);
+  //       payload.measurements.push(recipeData[meas + i]);
+  //     }
+  //   }
+  //   return payload;
+  // };
 
   useEffect(() => {
     fetchingRecommendations(detailsType);
   }, []);
 
   useEffect(() => {
-    setRecipeRecommended(getRecommendations(recommendations));
+    setRecipeRecommended(recommendations);
   }, [recommendations]);
 
   const storageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
@@ -98,8 +96,10 @@ function RecipeDetail() {
   }, []);
 
   useEffect(() => {
-    setDetailedRecipe(getDetails(recipe));
+    setDetailedRecipe(recipe);
   }, [recipe]);
+
+  console.log(recommendations)
 
   return (
     <div>
@@ -120,7 +120,6 @@ function RecipeDetail() {
         onClick={ startBtn }
       >
         { !isRecipeStarted ? 'Start Recipe' : 'Continue Recipe' }
-
       </button>
     </div>
   );
