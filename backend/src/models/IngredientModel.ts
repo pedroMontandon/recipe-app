@@ -18,7 +18,7 @@ export default class IngredientModel {
       where: {
         name: { [Op.substring]: `%${query}`}
       },
-      include: [ { model: SequelizeRecipe, through: {as: 'ingredients_recipes'}, as: 'recipes'}]
+      include: [ { model: SequelizeRecipe, as: 'recipes'}]
     });
     return filteredRecipes;
   }

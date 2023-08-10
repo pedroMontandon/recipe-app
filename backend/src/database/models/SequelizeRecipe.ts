@@ -2,6 +2,8 @@ import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, 
 import db from '.';
 import SequelizeCategory from './SequelizeCategory';
 import SequelizeArea from './SequelizeArea';
+import SequelizeIngredient from './SequelizeIngredient';
+import SequelizeIngredientsRecipes from './SequelizeIngredientsRecipes';
 
 class SequelizeRecipe extends Model<InferAttributes<SequelizeRecipe>, InferCreationAttributes<SequelizeRecipe>> {
   declare id: CreationOptional<number>;
@@ -83,5 +85,25 @@ SequelizeCategory.hasMany(SequelizeRecipe, { foreignKey: 'categoryId', as: 'reci
 
 SequelizeRecipe.belongsTo(SequelizeArea, { foreignKey: 'categoryId', as: 'area', targetKey: 'id' });
 SequelizeArea.hasMany(SequelizeRecipe, { foreignKey: 'categoryId', as: 'recipes' });
+
+SequelizeIngredient.belongsToMany(
+  SequelizeRecipe,
+  {
+    through: SequelizeIngredientsRecipes,
+    as: 'recipes',
+    foreignKey: 'ingredientId',
+    otherKey: 'recipeId',
+  }
+);
+
+SequelizeRecipe.belongsToMany(
+  SequelizeIngredient,
+  {
+    through: SequelizeIngredientsRecipes,
+    as: 'ingredients',
+    foreignKey: 'recipeId',
+    otherKey: 'ingredientId',
+  }
+);
 
 export default SequelizeRecipe;

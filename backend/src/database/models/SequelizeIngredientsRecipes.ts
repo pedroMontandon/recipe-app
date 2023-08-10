@@ -6,8 +6,6 @@ import {
   CreationOptional,
 } from 'sequelize';
 import db from '.';
-import SequelizeIngredient from './SequelizeIngredient';
-import SequelizeRecipe from './SequelizeRecipe';
 
 class SequelizeIngredientsRecipes extends Model<
   InferAttributes<SequelizeIngredientsRecipes>,
@@ -58,25 +56,5 @@ SequelizeIngredientsRecipes.init ({
   timestamps: false,
   underscored: true
 });
-
-SequelizeIngredient.belongsToMany(
-  SequelizeRecipe,
-  {
-    through: SequelizeIngredientsRecipes,
-    as: 'recipes',
-    foreignKey: 'ingredientId',
-    otherKey: 'recipeId',
-  }
-);
-
-SequelizeRecipe.belongsToMany(
-  SequelizeIngredient,
-  {
-    through: SequelizeIngredientsRecipes,
-    as: 'ingredients',
-    foreignKey: 'recipeId',
-    otherKey: 'ingredientId',
-  }
-);
 
 export default SequelizeIngredientsRecipes;
