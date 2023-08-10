@@ -53,7 +53,7 @@ SequelizeRecipe.belongsToMany(
   },
 );
 
-SequelizeFavorite.belongsToMany(
+SequelizeUser.belongsToMany(
   SequelizeRecipe,
   {
     through: SequelizeFavorite,

@@ -13,5 +13,6 @@ router.get('/letter', (req: Request, res: Response) => recipesController.getByFi
 router.get('/categories', (req: Request, res: Response) => categoryController.getAll(req, res));
 router.get('/category', (req, res) => categoryController.getRecipesByCategory(req, res));
 router.get('/ingredient', (req, res) => ingredientController.getByIngredient(req, res));
+router.get('/random', (req, res) => recipesController.random(req, res));
 
 export default router;
