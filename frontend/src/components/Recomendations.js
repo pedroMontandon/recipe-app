@@ -33,7 +33,7 @@ function Recomendations({ payload }) {
             {reco.name}
           </h3>
           <img
-            src={ reco.Thumb }
+            src={ reco.thumb }
             alt={ reco.name }
             style={ card }
           />

@@ -11,7 +11,7 @@ import '../styles/Recipes.css';
 
 function Recipes({ title }) {
   const { functions } = useContext(AppContext);
-  const [isLoading, , recipes, fetchRecipes] = useFetch({ [title.toLowerCase()]: [] });
+  const [isLoading, , recipes, fetchRecipes] = useFetch([]);
   const { URL_API, recipesResponse, RecipeCard } = useRecipes(title);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function Recipes({ title }) {
   }, [title]);
 
   useEffect(() => {
-    functions[`set${title}`](recipes[title.toLowerCase()]);
+    functions[`set${title}`](recipes);
   }, [recipes]);
 
   return (

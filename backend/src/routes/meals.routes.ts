@@ -14,5 +14,6 @@ router.get('/categories', (req: Request, res: Response) => categoryController.ge
 router.get('/category', (req, res) => categoryController.getRecipesByCategory(req, res));
 router.get('/ingredient', (req, res) => ingredientController.getByIngredient(req, res));
 router.get('/random', (req, res) => recipesController.random(req, res));
+router.get('/:id', (req, res) => recipesController.getById(req, res));
 
 export default router;

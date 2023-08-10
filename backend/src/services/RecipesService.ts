@@ -27,4 +27,10 @@ export default class RecipesService {
     const recipes = await this.recipesModel.random(l, type);
     return { status: 'SUCCESSFUL', data: recipes };
   }
+
+  public async findByPk(id: string | number, type: string): Promise<ServiceResponse<IRecipes | null>> {
+    const recipe = await this.recipesModel.findByPk(id, type);
+    if (!recipe) return { status: 'NOT_FOUND', data: { message: 'Recipe not found' } };
+    return { status: 'SUCCESSFUL', data: recipe };
+  }
 }

@@ -8,16 +8,14 @@ function Details({ payload }) {
   const toSlice = 32;
   const {
     title,
-    thumbnail,
+    thumb,
     category,
-    alcoholicOrNot,
     ingredients,
-    measurements,
     instructions,
-    video,
+    youtube,
   } = payload;
   const bannerBG = { backgroundImage:
-    `url(${thumbnail})`,
+    `url(${thumb})`,
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   };
@@ -31,12 +29,12 @@ function Details({ payload }) {
         <div
           className="category-title"
         >
-          <img src={ video === 'false' ? drinkIcon : foodIcon } alt="recipe icon" />
+          <img src={ youtube === 'false' ? drinkIcon : foodIcon } alt="recipe icon" />
           <h4
             className="category-title"
             data-testid="recipe-category"
           >
-            { alcoholicOrNot === '' ? category : category }
+            {/* { alcoholicOrNot === '' ? category : category } */ category.name}
           </h4>
         </div>
         <h1
@@ -57,10 +55,10 @@ function Details({ payload }) {
       >
         {ingredients.map((ing, index) => ((
           <li
-            key={ `${ing}${index}` }
+            key={ `${ing.name}${index}` }
             data-testid={ `${index}-ingredient-name-and-measure` }
           >
-            {`${measurements[index] || ''} ${ing || ''}`}
+            {`${ing.ingredients_recipes.measure || ''} ${ing.name || ''}`}
           </li>)))}
       </ul>
       <h4
@@ -74,7 +72,7 @@ function Details({ payload }) {
       >
         { instructions }
       </p>
-      {video !== 'false' ? <Iframe embedId={ video.slice(toSlice) } /> : false}
+      {youtube ? <Iframe embedId={ youtube.slice(toSlice) } /> : false}
     </>
   );
 }
@@ -82,12 +80,11 @@ function Details({ payload }) {
 Details.propTypes = {
   payload: PropTypes.shape({
     title: PropTypes.string,
-    thumbnail: PropTypes.string,
+    thumb: PropTypes.string,
     category: PropTypes.string,
     ingredients: PropTypes.arrayOf(PropTypes.string),
-    measurements: PropTypes.arrayOf(PropTypes.string),
     instructions: PropTypes.string,
-    video: PropTypes.string,
+    youtube: PropTypes.string,
     alcoholicOrNot: PropTypes.string,
   }).isRequired,
 };

@@ -20,6 +20,20 @@ export default class RecipesModel {
     });
   }
 
+  async findByPk(id: string | number, type: string): Promise<IRecipes | null> {
+    return this.recipeModel.findOne(
+      {
+        where: {
+          type: {
+            [Op.like]: `%${type}%`
+          },
+          id,
+        },
+        include: [{ model: SequelizeCategory, as: 'category'}, { model: SequelizeArea, as: 'area'}, { model: SequelizeIngredient, as: 'ingredients'}]
+      }
+    );
+  }
+
   async findByName(name: string, type: string): Promise<IRecipes[]> {
     return await this.recipeModel.findAll({
       where: {

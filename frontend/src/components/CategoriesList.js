@@ -11,9 +11,7 @@ const icons = { ...mealsIcons, ...drinksIcons };
 function CategoriesList({ title, fetchRecipes }) {
   const lowerTitle = title.toLowerCase();
   const { URL_CATEGORIES, URL_CATEGORY_SELECTED, URL_API } = useRecipes(title);
-  const [, , categories, fetchCategories] = useFetch(
-    { [lowerTitle]: [] },
-  );
+  const [, , categories, fetchCategories] = useFetch([]);
   const [toggles, setToggles] = useState({});
 
   useEffect(() => {
@@ -21,8 +19,8 @@ function CategoriesList({ title, fetchRecipes }) {
   }, [title]);
 
   useEffect(() => {
-    setToggles(categories[lowerTitle]
-      .reduce((acc, curr) => ({ ...acc, [curr.strCategory]: false }), {}));
+    setToggles(categories
+      .reduce((acc, curr) => ({ ...acc, [curr.name]: false }), {}));
   }, [categories]);
 
   const handleCategoriesClick = (value) => {
@@ -38,14 +36,16 @@ function CategoriesList({ title, fetchRecipes }) {
     setToggles({ ...allToggles, [value]: !toggles[value] });
   };
 
+  
+
   return (
     <section className="categories-list">
       {
-        categories[lowerTitle] && categories[lowerTitle]
+        categories && categories
           .map(
             (category, index) => {
               const indexLimit = 5;
-              const iconStr = category.strCategory.toLowerCase().replaceAll(' ', '');
+              const iconStr = category.name.toLowerCase().replaceAll(' ', '');
               if (index < indexLimit) {
                 return (<CategoryCard
                   category={ category }

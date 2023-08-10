@@ -13,7 +13,7 @@ function RecipeInProgressCard({ recipe, id }) {
   const lowerTitle = `${actualPage.toLowerCase()}s`;
 
   const bannerBG = { backgroundImage:
-    `url(${recipe[lowerTitle][0][`str${actualPage}Thumb`]})`,
+    `url(${recipe.thumb})`,
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   };
@@ -33,20 +33,19 @@ function RecipeInProgressCard({ recipe, id }) {
           <h4
             data-testid="recipe-category"
           >
-            { `${isMealsPage
-              ? recipe[lowerTitle][0].strCategory : recipe[lowerTitle][0].strAlcoholic}` }
+            { recipe.category.name }
           </h4>
         </div>
         <h1
           data-testid="recipe-title"
           className="progress-title"
         >
-          {recipe[lowerTitle][0][`str${actualPage}`]}
+          {recipe.name}
 
         </h1>
 
       </div>
-      <Ingredients recipe={ recipe[lowerTitle][0] } id={ id } title={ lowerTitle } />
+      <Ingredients recipe={ recipe } id={ id } title={ lowerTitle } />
       <section
         className="instructions"
       >
@@ -54,7 +53,7 @@ function RecipeInProgressCard({ recipe, id }) {
         <div
           className="subsection"
         >
-          <p data-testid="instructions">{ recipe[lowerTitle][0].strInstructions }</p>
+          <p data-testid="instructions">{ recipe.instructions }</p>
         </div>
       </section>
     </section>
