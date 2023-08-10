@@ -21,4 +21,10 @@ export default class RecipesService {
     const foundRecipe = await this.recipesModel.findByFirstLetter(letter, type);
     return { status: 'SUCCESSFUL', data: foundRecipe };
   }
+
+  public async random(limit: string = '1', type: string): Promise<ServiceResponse<IRecipes[]>> {
+    const l = limit === '1' ? 1 : parseInt(limit);
+    const recipes = await this.recipesModel.random(l, type);
+    return { status: 'SUCCESSFUL', data: recipes };
+  }
 }
