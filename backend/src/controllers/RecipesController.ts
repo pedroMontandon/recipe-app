@@ -20,4 +20,11 @@ export default class RecipesController {
     const serviceResponse = await this.recipesService.findByFirstLetter(query, res.locals.type);
     return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
+
+  public async random(req: Request, res: Response) {
+    const { limit } = req.query;
+    const { type } = res.locals;
+    const { status, data } = await this.recipesService.random(limit as string, type);
+    return res.status(mapStatusHTTP(status)).json(data);
+  }
 }
