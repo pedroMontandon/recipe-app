@@ -10,7 +10,7 @@ function FavoriteRecipeCard({ recipe, index }) {
     <section className="favorite-recipe-card">
       <div
         role="presentation"
-        onClick={ () => push(`/${type}s/${id}`) }
+        onClick={ () => push(`/${type}/${id}`) }
       >
         <img
           data-testid={ `${index}-horizontal-image` }
@@ -26,7 +26,7 @@ function FavoriteRecipeCard({ recipe, index }) {
       </div>
       <ShareAndFavHorizontal
         recipe={ recipe }
-        url={ `${window.location.origin}/${type}s/${id}` }
+        url={ `${window.location.origin}/${type}/${id}` }
         index={ index }
       />
     </section>
