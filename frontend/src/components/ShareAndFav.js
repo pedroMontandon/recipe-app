@@ -9,7 +9,6 @@ import { AppContext } from '../context/AppProvider';
 function ShareAndFav({ url, recipe }) {
   const { functions: { setFavoriteRecipes }, favoriteRecipes } = useContext(AppContext);
   const [copied, setCopied] = useState(false);
-  console.log(recipe);
   const [favorite, setFavorite] = useState(
     favoriteRecipes.some(({ id }) => recipe.id === id),
   );
