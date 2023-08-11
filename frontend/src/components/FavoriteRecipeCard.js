@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import ShareAndFavHorizontal from './ShareAndFavHorizontal';
 
 function FavoriteRecipeCard({ recipe, index }) {
-  const { type, id, name, image, category, nationality, alcoholicOrNot } = recipe;
+  const { type, id, name, image, category, nationality } = recipe;
   const { push } = useHistory();
   return (
     <section className="favorite-recipe-card">
@@ -20,7 +20,7 @@ function FavoriteRecipeCard({ recipe, index }) {
         <div className="text-container-card">
           <h3 data-testid={ `${index}-horizontal-name` }>{ name }</h3>
           <p data-testid={ `${index}-horizontal-top-text` }>
-            { !alcoholicOrNot ? `${nationality} - ${category}` : alcoholicOrNot }
+            { `${nationality.name} - ${category.name}` }
           </p>
         </div>
       </div>
