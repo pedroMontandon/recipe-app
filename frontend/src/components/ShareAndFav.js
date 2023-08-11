@@ -22,8 +22,8 @@ function ShareAndFav({ url, recipe }) {
     const toLocalStorage = {
       id: data.id,
       type: data.type.toLowerCase(),
-      nationality: data.area,
-      category: data.category,
+      nationality: data.area.name,
+      category: data.category.name,
       name: data.name,
       image: data.thumb,
     };

@@ -6,8 +6,7 @@ import shareIcon from '../images/shareIcon.svg';
 
 function DoneRecipeCard({ recipe, index }) {
   const history = useHistory();
-  const { name, doneDate, category, image, nationality,
-    alcoholicOrNot, tags, type, id } = recipe;
+  const { name, doneDate, category, image, nationality, tags, type, id } = recipe;
   const [copied, setCopied] = useState(false);
   const hasTag = tags.sort((a, b) => a - b) || [];
 
@@ -41,15 +40,15 @@ function DoneRecipeCard({ recipe, index }) {
         <p
           data-testid={ `${index}-horizontal-top-text` }
         >
-          { `${nationality} - ${category}` }
+          { `${nationality.name} - ${category.name}` }
         </p>
       )}
-      { alcoholicOrNot
+      {/* { alcoholicOrNot
       && (
         <p data-testid={ `${index}-horizontal-top-text` }>
           { alcoholicOrNot }
         </p>
-      )}
+      )} */}
       <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
       <button
         onClick={ () => { toClipBoard(window.location.origin); } }
