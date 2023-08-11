@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import setIcons from '../helpers/setIcons';
 
 function CategoryCard({ category: { name }, onClick, icon }) {
   return (
@@ -12,7 +13,7 @@ function CategoryCard({ category: { name }, onClick, icon }) {
         <div>
           <img src={ icon } alt={ name } />
         </div>
-        <span>{name}</span>
+        <span>{setIcons(name)}</span>
       </button>
     </div>
   );

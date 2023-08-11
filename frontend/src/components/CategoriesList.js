@@ -9,7 +9,6 @@ import drinksIcons from '../helpers/drinkIcons';
 const icons = { ...mealsIcons, ...drinksIcons };
 
 function CategoriesList({ title, fetchRecipes }) {
-  const lowerTitle = title.toLowerCase();
   const { URL_CATEGORIES, URL_CATEGORY_SELECTED, URL_API } = useRecipes(title);
   const [, , categories, fetchCategories] = useFetch([]);
   const [toggles, setToggles] = useState({});
@@ -29,14 +28,12 @@ function CategoriesList({ title, fetchRecipes }) {
     } else {
       fetchRecipes(URL_API);
     }
-    const allToggles = categories[lowerTitle]
+    const allToggles = categories
       .reduce((acc, curr) => (
-        { ...acc, [curr.strCategory]: false }
+        { ...acc, [curr.name]: false }
       ), {});
     setToggles({ ...allToggles, [value]: !toggles[value] });
   };
-
-  
 
   return (
     <section className="categories-list">
@@ -44,9 +41,12 @@ function CategoriesList({ title, fetchRecipes }) {
         categories && categories
           .map(
             (category, index) => {
-              const indexLimit = 5;
+              const categoryIcons = ['allMeals', 'beef', 'side', 'lamb', 'chicken',
+                'dessert', 'ordinarydrink', 'cocktail', 'punch/partydrink', 'coffee/tea',
+                'shot'];
               const iconStr = category.name.toLowerCase().replaceAll(' ', '');
-              if (index < indexLimit) {
+              console.log(iconStr);
+              if (categoryIcons.includes(iconStr)) {
                 return (<CategoryCard
                   category={ category }
                   key={ index }
@@ -62,8 +62,8 @@ function CategoriesList({ title, fetchRecipes }) {
         data-testid="All-category-filter"
         onClick={ () => {
           fetchRecipes(URL_API);
-          const allToggles = categories[lowerTitle]
-            .reduce((acc, curr) => ({ ...acc, [curr.strCategory]: false }), {});
+          const allToggles = categories
+            .reduce((acc, curr) => ({ ...acc, [curr.name]: false }), {});
           setToggles(allToggles);
         } }
         className="category-button"
