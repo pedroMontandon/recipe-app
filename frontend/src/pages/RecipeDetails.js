@@ -99,8 +99,6 @@ function RecipeDetail() {
     setDetailedRecipe(recipe);
   }, [recipe]);
 
-  console.log(recommendations)
-
   return (
     <div>
       <section

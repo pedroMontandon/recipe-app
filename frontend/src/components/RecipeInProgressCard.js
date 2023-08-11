@@ -12,6 +12,8 @@ function RecipeInProgressCard({ recipe, id }) {
   const actualPage = isMealsPage ? 'Meal' : 'Drink';
   const lowerTitle = `${actualPage.toLowerCase()}s`;
 
+  console.log(recipe);
+
   const bannerBG = { backgroundImage:
     `url(${recipe.thumb})`,
   backgroundRepeat: 'no-repeat',

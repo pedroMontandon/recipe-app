@@ -21,7 +21,7 @@ function FilterBtnRow({ filterState }) {
       <button
         data-testid="filter-by-meal-btn"
         name="meal"
-        onClick={ () => { filterState('meal'); } }
+        onClick={ () => { filterState('meals'); } }
         className="filter-button"
       >
         <div>
@@ -32,7 +32,7 @@ function FilterBtnRow({ filterState }) {
       <button
         data-testid="filter-by-drink-btn"
         name="drink"
-        onClick={ () => { filterState('drink'); } }
+        onClick={ () => { filterState('drinks'); } }
         className="filter-button"
       >
         <div>

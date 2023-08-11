@@ -27,7 +27,7 @@ function RecipeInProgress() {
   if (isLoading) return <h1>Loading...</h1>;
   return (
     <section>
-      <ShareAndFav url={ URLpath } recipe={ recipe } />
+      { recipe && <ShareAndFav url={ URLpath } recipe={ recipe } /> }
       { recipe && (
         <RecipeInProgressCard recipe={ recipe } id={ id } />
       )}

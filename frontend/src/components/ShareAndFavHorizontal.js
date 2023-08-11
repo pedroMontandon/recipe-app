@@ -20,12 +20,11 @@ function ShareAndFavHorizontal({ url, recipe, index }) {
   const parseRecipe = (data) => {
     const toLocalStorage = {
       id: data.id,
-      type: data.video === 'false' ? 'drink' : 'meal',
-      nationality: data.video !== 'false' ? data.area : '',
-      category: data.category,
-      alcoholicOrNot: data.video === 'false' ? data.alcoholicOrNot : '',
-      name: data.title,
-      image: data.thumbnail,
+      type: data.type.toLowerCase(),
+      nationality: data.area.name,
+      category: data.category.name,
+      name: data.name,
+      image: data.thumb,
     };
     return toLocalStorage;
   };

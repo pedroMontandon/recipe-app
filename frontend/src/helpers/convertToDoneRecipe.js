@@ -1,13 +1,12 @@
 const convertToDoneRecipe = (recipe) => ({
-  id: recipe.idDrink || recipe.idMeal,
-  type: recipe.idDrink ? 'drink' : 'meal',
-  nationality: recipe.strArea || '',
-  category: recipe.strCategory,
-  alcoholicOrNot: recipe.strAlcoholic || '',
-  name: recipe.strMeal || recipe.strDrink,
-  image: recipe.strMealThumb || recipe.strDrinkThumb,
+  id: recipe.id,
+  type: recipe.type.toLowerCase(),
+  nationality: recipe.area,
+  category: recipe.category,
+  name: recipe.name,
+  image: recipe.thumb,
   doneDate: (new Date()).toISOString(),
-  tags: recipe.strTags ? recipe.strTags.split(',')
+  tags: recipe.tags ? recipe.tags.split(',')
     .map((tag) => tag.replace(' ', '')) : [],
 });
 
