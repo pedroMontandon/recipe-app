@@ -21,12 +21,11 @@ function ShareAndFav({ url, recipe }) {
   const parseRecipe = (data) => {
     const toLocalStorage = {
       id: data.id,
-      type: data.video === 'false' ? 'drink' : 'meal',
-      nationality: data.video !== 'false' ? data.area : '',
+      type: data.type.toLowerCase(),
+      nationality: data.area,
       category: data.category,
-      alcoholicOrNot: data.video === 'false' ? data.alcoholicOrNot : '',
-      name: data.title,
-      image: data.thumbnail,
+      name: data.name,
+      image: data.thumb,
     };
     return toLocalStorage;
   };
