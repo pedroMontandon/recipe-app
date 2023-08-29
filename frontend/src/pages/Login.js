@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { AppContext } from '../context/AppProvider';
 import logo from '../images/food.png';
 import '../styles/Login.css';
+import api from '../utils/api';
 
 function Login() {
   const [componentEmail, setComponentEmail] = useState('');
@@ -21,13 +22,27 @@ function Login() {
     }
   }, [componentEmail, password]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const userEmail = { email: componentEmail };
-    setEmail(componentEmail);
-    localStorage.setItem('user', JSON.stringify(userEmail));
-    history.push('/meals');
-    setTitle('Meals');
+
+    try {
+      const { data: { token } } = await api.post(
+        '/user/login',
+        {
+          email: componentEmail,
+          password
+        }
+      );
+      const userEmail = { email: componentEmail };
+      setEmail(componentEmail);
+      localStorage.setItem('user', JSON.stringify(userEmail));
+      localStorage.setItem('token', token);
+      history.push('/meals');
+      setTitle('Meals');
+    } catch (error) {
+      console.log('Erro');
+      console.log(error.response.data);
+    }
   };
 
   return (

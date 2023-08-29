@@ -14,10 +14,10 @@ export default class UserService {
 
   async login (email: string, password: string): Promise<ServiceResponse<Token>> {
     const user = await this.userModel.findByEmail(email);
-    if (!user) return { status: 'NOT_FOUND', data: { message: 'User not found' } };
+    if (!user) return { status: 'INVALID_DATA', data: { message: 'Invalid email or password' } };
     if (!user.activated) return { status: 'UNAUTHORIZED', data: { message: 'User not activated' } };
     const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) return { status: 'INVALID_DATA', data: { message: 'Invalid password' } };
+    if (!passwordMatch) return { status: 'INVALID_DATA', data: { message: 'Invalid email or password' } };
     const token = this.jwtUtils.sign({ id: user.id, email: user.email, username: user.username });
     return { status: 'SUCCESSFUL', data: { token } };
   }
