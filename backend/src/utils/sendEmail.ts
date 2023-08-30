@@ -15,6 +15,6 @@ export async function sendCodeEmail(email:string, username: string, code:string)
     to: email,
     subject: 'Activation Code',
     html: `<h1>Welcome to RARP, ${username}</h1>
-    <p>Please access this page to activate your account: ${code}</p>`,
+    <p>Please access this page to activate your account: <a href="${code}">${code}</a></p>`,
   });
 }
