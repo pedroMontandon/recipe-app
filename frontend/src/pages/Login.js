@@ -15,7 +15,7 @@ function Login() {
   useEffect(() => {
     const minCharacters = 6;
     if (componentEmail.includes('@') && componentEmail.includes('.com')
-    && password.length > minCharacters) {
+    && password.length >= minCharacters) {
       setDisabled(false);
     } else {
       setDisabled(true);

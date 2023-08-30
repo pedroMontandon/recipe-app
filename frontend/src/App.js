@@ -9,6 +9,7 @@ import Profile from './pages/Profile';
 import RecipeDetails from './pages/RecipeDetails';
 import RecipeInProgress from './pages/RecipeInProgress';
 import Recipes from './pages/Recipes';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/meals" render={ () => (<Recipes title="Meals" />) } />
         <Route path="/drinks" render={ () => (<Recipes title="Drinks" />) } />
         <Route path="/profile" component={ Profile } />
+        <Route path="/sign-up" component={ SignUp } />
         <Route exact path="/" component={ Login } />
       </Switch>
     </div>
