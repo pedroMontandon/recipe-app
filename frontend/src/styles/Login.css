@@ -68,3 +68,7 @@
   background-color: var(--quaternary-color);
   cursor: pointer;
 }
+
+.link-to {
+ text-align: center;
+}

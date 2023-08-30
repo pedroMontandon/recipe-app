@@ -15,7 +15,7 @@ function Login() {
   useEffect(() => {
     const minCharacters = 6;
     if (componentEmail.includes('@') && componentEmail.includes('.com')
-    && password.length > minCharacters) {
+    && password.length >= minCharacters) {
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -73,6 +73,7 @@ function Login() {
           value={ password }
           onChange={ ({ target }) => setPassword(target.value) }
         />
+        <p className="link-to">Don't have an account? <a href='/sign-up'>Sign-up</a></p>
         <button
           className="login-button"
           data-testid="login-submit-btn"
