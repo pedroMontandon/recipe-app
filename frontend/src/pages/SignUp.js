@@ -89,6 +89,7 @@ function SignUp() {
           value={ confirm }
           onChange={ ({ target }) => setConfirm(target.value) }
         />
+        <p className="link-to">Already have an account? <a href='/'>Sign-in</a></p>
         <button
           className="login-button"
           data-testid="login-submit-btn"
