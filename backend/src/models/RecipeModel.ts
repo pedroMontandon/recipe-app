@@ -5,6 +5,7 @@ import SequelizeCategory from '../database/models/SequelizeCategory';
 import SequelizeArea from '../database/models/SequelizeArea';
 import SequelizeIngredient from '../database/models/SequelizeIngredient';
 import db from '../database/models';
+import { NewEntity } from '../interfaces';
 
 export default class RecipesModel {
   private recipeModel = SequelizeRecipe;
@@ -62,12 +63,17 @@ export default class RecipesModel {
     });
   }
 
-  async random(limit: number = 1, type: string) {
+  async random(limit: number = 1, type: string): Promise<IRecipes[]> {
     const recipes = await this.recipeModel.findAll({
       where: { type },
       order: db.random(),
       limit,
     });
     return recipes;
+  }
+
+  async create(data: NewEntity<IRecipes>): Promise<IRecipes> {
+    const recipe = await this.recipeModel.create(data);
+    return recipe;
   }
 }

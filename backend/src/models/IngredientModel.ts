@@ -22,4 +22,9 @@ export default class IngredientModel {
     });
     return filteredRecipes;
   }
+
+  async findByIds(ids: (number | string)[]): Promise<IIngredient[]> {
+    const ingredients = await this.ingredientModel.findAll({ where: { id: ids }});
+    return ingredients;
+  }
 }

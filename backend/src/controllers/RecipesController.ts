@@ -32,4 +32,9 @@ export default class RecipesController {
     const { status, data } = await this.recipesService.random(limit as string, type);
     return res.status(mapStatusHTTP(status)).json(data);
   }
+
+  public async create(req: Request, res: Response) {
+    const { status, data } = await this.recipesService.create(req.body);
+    return res.status(mapStatusHTTP(status)).json(data);
+  }
 }

@@ -8,7 +8,7 @@ import SequelizeIngredientsRecipes from './SequelizeIngredientsRecipes';
 class SequelizeRecipe extends Model<InferAttributes<SequelizeRecipe>, InferCreationAttributes<SequelizeRecipe>> {
   declare id: CreationOptional<number>;
   declare name: string;
-  declare type: 'Drinks' | 'Meals';
+  declare type: string;
   declare categoryId: number;
   declare areaId: number;
   declare instructions: string;
@@ -60,7 +60,7 @@ SequelizeRecipe.init(
       allowNull: false,
     },
     thumb: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1500),
       allowNull: false,
     },
     tags: {
@@ -68,7 +68,7 @@ SequelizeRecipe.init(
       allowNull: true,
     },
     youtube: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1500),
       allowNull: true,
     },
   },
