@@ -10,4 +10,9 @@ export default class IngredientController {
     const { status, data } = await this.ingredientService.getByQuery(q ? q as string : '');
     return res.status(mapStatusHTTP(status)).json(data); 
   }
+
+  async getAll(req: Request, res: Response) {
+    const { status, data } = await this.ingredientService.getAll();
+    return res.status(mapStatusHTTP(status)).json(data);
+  }
 }

@@ -7,8 +7,7 @@ export default class IngredientModel {
   private ingredientModel = SequelizeIngredient;
   private recipeModel = SequelizeRecipe;
 
-  async getAll(type: string): Promise<IIngredient[]> {
-    console.log(type);
+  async getAll(): Promise<IIngredient[]> {
     const ingredients = await this.ingredientModel.findAll();
     return ingredients;
   }

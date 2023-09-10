@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../utils/api';
 
 function RecipeForm(
@@ -10,9 +10,22 @@ function RecipeForm(
   const [categories, setCategories] = useState([]);
   const [ingredients, setIngredients] = useState([])
 
-  useContext(() => {
-    setCategories(api.get('/categories'));
+  const fetchCategories = async () => {
+    setCategories((await api.get(`/${states.type.toLowerCase()}` + '/categories')).data);
+  };
+
+  const fetchIngredients = async () => {
+    setIngredients((await api.get('/ingredients')).data);
+  };
+
+  useEffect(() => {
+    fetchCategories();
+    fetchIngredients();
   }, []);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [states.type]);
 
   return (
     <form>
