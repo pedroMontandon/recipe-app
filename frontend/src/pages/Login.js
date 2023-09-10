@@ -40,7 +40,6 @@ function Login() {
       history.push('/meals');
       setTitle('Meals');
     } catch (error) {
-      console.log('Erro');
       console.log(error.response.data);
     }
   };
