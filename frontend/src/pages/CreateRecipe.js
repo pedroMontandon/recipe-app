@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import Footer from '../components/Footer';
 import RecipeForm from '../components/RecipeForm';
+import api from '../utils/api';
 
 function CreateRecipe() {
   const [recipe, setRecipe] = useState({
     name: '',
     type: 'Meals',
-    category: 0,
-    area: null,
+    categoryId: 0,
+    areaId: undefined,
     instructions: '',
     thumb: '',
     tags: [],
@@ -25,7 +26,24 @@ function CreateRecipe() {
         <h2>Create your recipe</h2>
       </header>
       <main>
-        <RecipeForm states={ recipe } func={ handleChange } />
+        <RecipeForm states={ recipe } func={ handleChange }>
+          <button
+            type="submit"
+            onClick={ async (e) => {
+              e.preventDefault();
+              const response = await api.post('/recipes', {
+                ...recipe,
+                tags: recipe.tags.join(', '),
+                categoryId: Number(recipe.categoryId),
+                youtube: recipe.youtube || undefined,
+                area: recipe.areaId || undefined,
+              });
+              console.log(response);
+            } }
+          >
+            Create Recipe
+          </button>
+        </RecipeForm>
       </main>
       <Footer/>
     </div>

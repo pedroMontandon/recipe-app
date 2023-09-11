@@ -5,6 +5,7 @@ function RecipeForm(
   {
     states,
     func,
+    children,
   }
 ) {
   const [categories, setCategories] = useState([]);
@@ -61,24 +62,26 @@ function RecipeForm(
       <label>
         Category:
         <select
-          name="category"
-          value={ states.category }
+          name="categoryId"
+          value={ states.categoryId }
           onChange={ func }
         >
           <option value={ 0 }>
             -- Select --
           </option>
-          <option value={ 1 }>
-            Select
-          </option>
+          {
+            categories.map(({ id, name }) => (
+              <option value={ id } key={ `${id}-${name}` } >{name}</option>
+            ))
+          }
         </select>
       </label>
       <br/>
       <label>
         Area:
         <select
-          name="area"
-          value={ states.area }
+          name="areaId"
+          value={ states.areaId }
           onChange={ func }
         >
           <option value={ null }>
@@ -140,9 +143,11 @@ function RecipeForm(
           <option value={ 0 }>
             -- Select --
           </option>
-          <option value={ 1 }>
-            Select
-          </option>
+          {
+            ingredients.map(({ id, name }) => (
+              <option key={ `${id}-${name}` } value={ id } >{name}</option>
+            ))
+          }
         </select>
         <input
           id="measure"
@@ -155,13 +160,17 @@ function RecipeForm(
             const measure = document.getElementById('measure');
             func({ target: {
               name: 'ingredients',
-              value: [...states.ingredients, { id: id.value, measure: measure.value }],
+              value: [...states.ingredients, { id: Number(id.value), measure: measure.value }],
             }});
             id.value = 0;
             measure.value = '';
           } }
         >Add ingredient to recipe</button>
       </label>
+      <br/>
+      {
+        children
+      }
     </form>
   );
 }
