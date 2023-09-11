@@ -38,6 +38,17 @@ function CreateRecipe() {
                 youtube: recipe.youtube || undefined,
                 area: recipe.areaId || undefined,
               });
+              setRecipe({
+                name: '',
+                type: 'Meals',
+                categoryId: 0,
+                areaId: undefined,
+                instructions: '',
+                thumb: '',
+                tags: [],
+                youtube: '',
+                ingredients: [],
+              });
               console.log(response);
             } }
           >
