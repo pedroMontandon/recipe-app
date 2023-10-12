@@ -18,7 +18,7 @@ function CreateRecipe() {
 
   const handleChange = ({ target: { name, value } }) => {
     setRecipe({ ...recipe, [name]: value });
-  }
+  };
 
   return (
     <div className="create-recipe-page">
@@ -56,7 +56,7 @@ function CreateRecipe() {
           </button>
         </RecipeForm>
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

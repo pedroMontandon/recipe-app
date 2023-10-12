@@ -31,7 +31,7 @@ function SignUp() {
     e.preventDefault();
     try {
       if (password !== confirm) {
-        alert('Passwords do not match')
+        alert('Passwords do not match');
         return undefined;
       }
       const response = await api.post(
@@ -40,9 +40,9 @@ function SignUp() {
           email,
           username,
           password,
-        }
+        },
       );
-      alert(response.data.message)
+      alert(response.data.message);
       history.push('/');
     } catch (error) {
       alert(error.response.data.message);
@@ -89,7 +89,10 @@ function SignUp() {
           value={ confirm }
           onChange={ ({ target }) => setConfirm(target.value) }
         />
-        <p className="link-to">Already have an account? <a href='/'>Sign-in</a></p>
+        <p className="link-to">
+          Already have an account?
+          <a href="/">Sign-in</a>
+        </p>
         <button
           className="login-button"
           data-testid="login-submit-btn"
