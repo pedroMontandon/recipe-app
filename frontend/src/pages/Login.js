@@ -9,6 +9,7 @@ function Login() {
   const [componentEmail, setComponentEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setDisabled] = useState(true);
+  const [loginError, setLoginError] = useState('');
   const history = useHistory();
   const { functions: { setEmail, setTitle } } = useContext(AppContext);
 
@@ -30,17 +31,19 @@ function Login() {
         '/user/login',
         {
           email: componentEmail,
-          password
-        }
+          password,
+        },
       );
       const userEmail = { email: componentEmail };
       setEmail(componentEmail);
       localStorage.setItem('user', JSON.stringify(userEmail));
       localStorage.setItem('token', token);
+      setLoginError('');
       history.push('/meals');
       setTitle('Meals');
     } catch (error) {
       console.log(error.response.data);
+      setLoginError(error.response.data.message);
     }
   };
 
@@ -72,7 +75,10 @@ function Login() {
           value={ password }
           onChange={ ({ target }) => setPassword(target.value) }
         />
-        <p className="link-to">Don't have an account? <a href='/sign-up'>Sign-up</a></p>
+        <p className="link-to">
+          Don`t have an account?
+          <a href="/sign-up">Sign-up</a>
+        </p>
         <button
           className="login-button"
           data-testid="login-submit-btn"
@@ -80,6 +86,7 @@ function Login() {
         >
           Enter
         </button>
+        { loginError !== '' && <span>{ loginError }</span>}
       </form>
     </div>
   );
