@@ -131,7 +131,7 @@ function RecipeForm(
         >
           Add tag
         </button>
-        <CreatingTagsList tags={ states.tags } />
+        <CreatingTagsList tags={ states.tags } func={ func } />
       </label>
       <br />
       <label>
@@ -189,6 +189,7 @@ function RecipeForm(
         <CreatingIngredientsList
           ingredients={ states.ingredients }
           ingredientNames={ ingredients }
+          func={ func }
         />
       </label>
       <br />
