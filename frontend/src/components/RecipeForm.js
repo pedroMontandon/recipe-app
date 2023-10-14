@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import api from '../utils/api';
 
 function RecipeForm(
@@ -6,13 +7,13 @@ function RecipeForm(
     states,
     func,
     children,
-  }
+  },
 ) {
   const [categories, setCategories] = useState([]);
-  const [ingredients, setIngredients] = useState([])
+  const [ingredients, setIngredients] = useState([]);
 
   const fetchCategories = async () => {
-    setCategories((await api.get(`/${states.type.toLowerCase()}` + '/categories')).data);
+    setCategories((await api.get(`/${states.type.toLowerCase()}/categories`)).data);
   };
 
   const fetchIngredients = async () => {
@@ -42,23 +43,25 @@ function RecipeForm(
       <br />
       <label>
         Type:
-        <br/>
+        <br />
         <input
           type="radio"
           value="Meals"
           name="type"
           defaultChecked
           onClick={ func }
-        />Meals
-        <br/>
+        />
+        Meals
+        <br />
         <input
           type="radio"
           value="Drinks"
           name="type"
           onClick={ func }
-        />Drinks
+        />
+        Drinks
       </label>
-      <br/>
+      <br />
       <label>
         Category:
         <select
@@ -71,12 +74,12 @@ function RecipeForm(
           </option>
           {
             categories.map(({ id, name }) => (
-              <option value={ id } key={ `${id}-${name}` } >{name}</option>
+              <option value={ id } key={ `${id}-${name}` }>{name}</option>
             ))
           }
         </select>
       </label>
-      <br/>
+      <br />
       <label>
         Area:
         <select
@@ -89,7 +92,7 @@ function RecipeForm(
           </option>
         </select>
       </label>
-      <br/>
+      <br />
       <label>
         <textarea
           placeholder="Write the instructions"
@@ -97,7 +100,7 @@ function RecipeForm(
           onChange={ func }
         />
       </label>
-      <br/>
+      <br />
       <label>
         <input
           name="thumb"
@@ -107,10 +110,10 @@ function RecipeForm(
           placeholder="Image link:"
         />
       </label>
-      <br/>
+      <br />
       <label>
         <input
-          placeholder='Tag:'
+          placeholder="Tag:"
           id="tag"
         />
         <button
@@ -118,13 +121,16 @@ function RecipeForm(
           onClick={ () => {
             const tag = document.getElementById('tag');
             if (tag.value) {
-              func({ target: { name: 'tags', value: [...states.tags, tag.value] }})
+              func({ target: { name: 'tags', value: [...states.tags, tag.value] } });
             }
             tag.value = '';
           } }
-        >Add tag</button>
+        >
+          Add tag
+
+        </button>
       </label>
-      <br/>
+      <br />
       <label>
         <input
           name="youtube"
@@ -134,7 +140,7 @@ function RecipeForm(
           placeholder="Video link:"
         />
       </label>
-      <br/>
+      <br />
       <label>
         <select
           name="ingredient"
@@ -145,7 +151,7 @@ function RecipeForm(
           </option>
           {
             ingredients.map(({ id, name }) => (
-              <option key={ `${id}-${name}` } value={ id } >{name}</option>
+              <option key={ `${id}-${name}` } value={ id }>{name}</option>
             ))
           }
         </select>
@@ -158,21 +164,55 @@ function RecipeForm(
           onClick={ () => {
             const id = document.getElementById('ingredient');
             const measure = document.getElementById('measure');
-            func({ target: {
-              name: 'ingredients',
-              value: [...states.ingredients, { id: Number(id.value), measure: measure.value }],
-            }});
+            if (!id.value || !measure.value) return;
+            func({
+              target: {
+                name: 'ingredients',
+                value: [
+                  ...states.ingredients,
+                  {
+                    id: Number(id.value),
+                    measure: measure.value,
+                  },
+                ],
+              },
+            });
             id.value = 0;
             measure.value = '';
           } }
-        >Add ingredient to recipe</button>
+        >
+          Add ingredient to recipe
+        </button>
       </label>
-      <br/>
+      <br />
       {
         children
       }
     </form>
   );
 }
+
+RecipeForm.propTypes = {
+  states: PropTypes.shape(
+    {
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      categoryId: PropTypes.number.isRequired,
+      areaId: PropTypes.number,
+      instructions: PropTypes.string.isRequired,
+      thumb: PropTypes.string.isRequired,
+      tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+      youtube: PropTypes.string,
+      ingredients: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          measure: PropTypes.string,
+        }),
+      ).isRequired,
+    },
+  ).isRequired,
+  func: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
+};
 
 export default RecipeForm;

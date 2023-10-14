@@ -6,11 +6,13 @@ import ingredientsRouter from './ingredients.routes';
 import TypeVerification from '../middlewares/TypeVerification';
 import RecipesController from '../controllers/RecipesController';
 import RecipeValidation from '../middlewares/RecipeValidation';
+import TokenValidation from '../middlewares/TokenValidation';
 
 const router = Router();
 const recipeController = new RecipesController();
 
 router.use('/user', userRouter);
+router.use((new TokenValidation()).validate);
 router.use('/meals', TypeVerification.verifyType, mealsRouter);
 router.use('/drinks',TypeVerification.verifyType, drinksRouter);
 router.use('/ingredients', ingredientsRouter);

@@ -1,20 +1,21 @@
 import * as jwt from 'jsonwebtoken';
-import { Identifiable } from '../interfaces';
+import ITokenUtil from '../interfaces/ITokenUtil';
+import { Payload } from '../interfaces/ITokenUtil';
 
-export default class JwtUtils {
+export default class JwtUtils implements ITokenUtil<Payload> {
   private jwtSecret = process.env.JWT_SECRET || 'secret';
 
-  sign(payload: { id: Identifiable['id'], email: string, username: string }): string {
+  sign(payload: Payload): string {
     return jwt.sign(payload, this.jwtSecret);
   }
 
-  verify(token: string): { id: Identifiable['id'], email: string, username: string } {
+  verify(token: string): Payload {
     const bearerNToken = token.split(' ');
-    return jwt.verify(bearerNToken[1], this.jwtSecret) as { id: Identifiable['id'], email: string, username: string };
+    return jwt.verify(bearerNToken[1], this.jwtSecret) as Payload;
   }
 
-  decode(token: string): { id: Identifiable['id'], email: string, username: string } {
+  decode(token: string): Payload {
     const bearerNToken = token.split(' ');
-    return jwt.decode(bearerNToken[1]) as { id: Identifiable['id'], email: string, username: string };
+    return jwt.decode(bearerNToken[1]) as Payload;
   }
 }
