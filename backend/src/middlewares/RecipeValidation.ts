@@ -16,7 +16,7 @@ export default class RecipeValidation {
     ingredients: Joi.array().items(Joi.object({
       id: Joi.number().min(1).required(),
       measure: Joi.string(),
-    })).required(),
+    })).min(1).required(),
   });
 
   static validate(req: Request, res: Response, next: NextFunction) {

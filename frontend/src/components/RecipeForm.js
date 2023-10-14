@@ -97,6 +97,7 @@ function RecipeForm(
         <textarea
           placeholder="Write the instructions"
           name="instructions"
+          value={ states.instructions }
           onChange={ func }
         />
       </label>

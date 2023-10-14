@@ -31,25 +31,33 @@ function CreateRecipe() {
             type="submit"
             onClick={ async (e) => {
               e.preventDefault();
-              const response = await api.post('/recipes', {
-                ...recipe,
-                tags: recipe.tags.join(', '),
-                categoryId: Number(recipe.categoryId),
-                youtube: recipe.youtube || undefined,
-                area: recipe.areaId || undefined,
-              });
-              setRecipe({
-                name: '',
-                type: 'Meals',
-                categoryId: 0,
-                areaId: undefined,
-                instructions: '',
-                thumb: '',
-                tags: [],
-                youtube: '',
-                ingredients: [],
-              });
-              console.log(response);
+              try {
+                const token = localStorage.getItem('token');
+                await api.post(
+                  '/recipes',
+                  {
+                    ...recipe,
+                    tags: recipe.tags.join(', ') || undefined,
+                    categoryId: Number(recipe.categoryId),
+                    youtube: recipe.youtube || undefined,
+                    area: recipe.areaId || undefined,
+                  },
+                  { headers: { Authorization: `Bearer ${token}` } },
+                );
+                setRecipe({
+                  name: '',
+                  type: 'Meals',
+                  categoryId: 0,
+                  areaId: undefined,
+                  instructions: '',
+                  thumb: '',
+                  tags: [],
+                  youtube: '',
+                  ingredients: [],
+                });
+              } catch (error) {
+                alert(error.response.data.message);
+              }
             } }
           >
             Create Recipe
