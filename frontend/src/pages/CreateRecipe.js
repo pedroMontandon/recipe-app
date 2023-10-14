@@ -17,7 +17,6 @@ function CreateRecipe() {
   });
 
   const handleChange = ({ target: { name, value } }) => {
-    console.log(name, value);
     setRecipe({ ...recipe, [name]: value });
   };
 
