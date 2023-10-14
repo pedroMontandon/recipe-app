@@ -3,6 +3,7 @@ import userRouter from './user.routes';
 import mealsRouter from './meals.routes';
 import drinksRouter from './drinks.router';
 import ingredientsRouter from './ingredients.routes';
+import areasRouter from './areas.routes';
 import TypeVerification from '../middlewares/TypeVerification';
 import RecipesController from '../controllers/RecipesController';
 import RecipeValidation from '../middlewares/RecipeValidation';
@@ -14,6 +15,7 @@ const tokenValidate = new TokenValidation();
 
 router.use('/user', userRouter);
 router.use((req, res, next) => tokenValidate.validate(req, res, next));
+router.use('/areas', areasRouter);
 router.use('/meals', TypeVerification.verifyType, mealsRouter);
 router.use('/drinks',TypeVerification.verifyType, drinksRouter);
 router.use('/ingredients', ingredientsRouter);
