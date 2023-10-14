@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useFetch from '../hooks/useFetch';
+import CreatingIngredientsList from './CreatingIngredientsList';
 
 function RecipeForm(
   {
@@ -184,6 +185,10 @@ function RecipeForm(
         >
           Add ingredient to recipe
         </button>
+        <CreatingIngredientsList
+          ingredients={ states.ingredients }
+          ingredientNames={ ingredients }
+        />
       </label>
       <br />
       {
