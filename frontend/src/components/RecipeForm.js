@@ -13,22 +13,16 @@ function RecipeForm(
 ) {
   const [, , categories, getCategories] = useFetch([]);
   const [, , ingredients, getIngredients] = useFetch([]);
-
-  const fetchCategories = async () => {
-    getCategories(`/${states.type.toLowerCase()}/categories`);
-  };
-
-  const fetchIngredients = async () => {
-    getIngredients('/ingredients');
-  };
+  const [, , areas, getAreas] = useFetch([]);
 
   useEffect(() => {
-    fetchCategories();
-    fetchIngredients();
+    getCategories(`/${states.type.toLowerCase()}/categories`);
+    getIngredients('/ingredients');
+    getAreas('/areas');
   }, []);
 
   useEffect(() => {
-    fetchCategories();
+    getCategories(`/${states.type.toLowerCase()}/categories`);
   }, [states.type]);
 
   return (
@@ -92,6 +86,11 @@ function RecipeForm(
           <option value={ null }>
             Unknown
           </option>
+          {
+            areas.map(({ id, name }) => (
+              <option value={ id } key={ `${id}-${name}` }>{name}</option>
+            ))
+          }
         </select>
       </label>
       <br />
