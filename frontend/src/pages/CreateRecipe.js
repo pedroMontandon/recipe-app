@@ -8,7 +8,7 @@ function CreateRecipe() {
     name: '',
     type: 'Meals',
     categoryId: 0,
-    areaId: undefined,
+    areaId: 0,
     instructions: '',
     thumb: '',
     tags: [],
@@ -40,7 +40,7 @@ function CreateRecipe() {
                     tags: recipe.tags.join(', ') || undefined,
                     categoryId: Number(recipe.categoryId),
                     youtube: recipe.youtube || undefined,
-                    area: recipe.areaId || undefined,
+                    areaId: Number(recipe.areaId) || undefined,
                   },
                   { headers: { Authorization: `Bearer ${token}` } },
                 );
@@ -48,7 +48,7 @@ function CreateRecipe() {
                   name: '',
                   type: 'Meals',
                   categoryId: 0,
-                  areaId: undefined,
+                  areaId: 0,
                   instructions: '',
                   thumb: '',
                   tags: [],
@@ -56,7 +56,7 @@ function CreateRecipe() {
                   ingredients: [],
                 });
               } catch (error) {
-                alert(error.response.data.message);
+                alert(error.response?.data?.message);
               }
             } }
           >

@@ -83,7 +83,7 @@ function RecipeForm(
           value={ states.areaId }
           onChange={ func }
         >
-          <option value={ null }>
+          <option value={ 0 }>
             Unknown
           </option>
           {
