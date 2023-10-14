@@ -10,9 +10,10 @@ import TokenValidation from '../middlewares/TokenValidation';
 
 const router = Router();
 const recipeController = new RecipesController();
+const tokenValidate = new TokenValidation();
 
 router.use('/user', userRouter);
-router.use((new TokenValidation()).validate);
+router.use((req, res, next) => tokenValidate.validate(req, res, next));
 router.use('/meals', TypeVerification.verifyType, mealsRouter);
 router.use('/drinks',TypeVerification.verifyType, drinksRouter);
 router.use('/ingredients', ingredientsRouter);
