@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import api from '../utils/api';
+import useFetch from '../hooks/useFetch';
 
 function RecipeForm(
   {
@@ -9,15 +9,15 @@ function RecipeForm(
     children,
   },
 ) {
-  const [categories, setCategories] = useState([]);
-  const [ingredients, setIngredients] = useState([]);
+  const [, , categories, getCategories] = useFetch([]);
+  const [, , ingredients, getIngredients] = useFetch([]);
 
   const fetchCategories = async () => {
-    setCategories((await api.get(`/${states.type.toLowerCase()}/categories`)).data);
+    getCategories(`/${states.type.toLowerCase()}/categories`);
   };
 
   const fetchIngredients = async () => {
-    setIngredients((await api.get('/ingredients')).data);
+    getIngredients('/ingredients');
   };
 
   useEffect(() => {
