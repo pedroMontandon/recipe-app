@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useFetch from '../hooks/useFetch';
 import CreatingIngredientsList from './CreatingIngredientsList';
+import CreatingTagsList from './CreatingTagsList';
 
 function RecipeForm(
   {
@@ -129,8 +130,8 @@ function RecipeForm(
           } }
         >
           Add tag
-
         </button>
+        <CreatingTagsList tags={ states.tags } />
       </label>
       <br />
       <label>

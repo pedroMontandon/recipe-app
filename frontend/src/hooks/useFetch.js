@@ -9,12 +9,10 @@ function useFetch(initialDataValue = null) {
   const { push } = useHistory();
   useEffect(() => {
     const errorStatus = 401;
-    console.log(errors);
     if (errors && errors.response.status === errorStatus) push('/');
   }, [errors]);
   const fetchingData = async (URL) => {
     const token = localStorage.getItem('token');
-    console.log(token);
     api.get(
       URL,
       { headers: { Authorization: `Bearer ${token}` } },
